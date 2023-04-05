@@ -1,0 +1,106 @@
+{% extends 'store/main.html' %}
+{% load static %}
+
+{% block content %}
+<div class="row">
+    <div class="col-lg-6">
+        <div class="box-element" id="form-wrapper">
+            <form action="" id="form">
+                <div id="user-info">
+
+                    <div class="form-field">
+                        <label>
+                            <input required class="form-control" type="text" name="name" placeholder="Name..">
+                        </label>
+                    </div>
+
+                    <div class="form-field">
+                        <label>
+                            <input required class="form-control" type="email" name="email" placeholder="Email..">
+                        </label>
+                    </div>
+
+                    <div class="form-field">
+                        <label>
+                            <input required class="form-control" type="tel" name="phone" placeholder="Phone..">
+                        </label>
+                    </div>
+                </div>
+
+                <div id="shipping-info">
+                    <hr>
+                    <p>Shipping Information:</p>
+                    <hr>
+
+                    <div class="form-field">
+                        <label>
+                            <input required class="form-control" type="text" name="address" placeholder="Address..">
+                        </label>
+                    </div>
+
+                    <div class="form-field">
+                        <label>
+                            <input required class="form-control" type="text" name="city" placeholder="City..">
+                        </label>
+                    </div>
+
+                    <div class="form-field">
+                        <label>
+                            <input required class="form-control" type="text" name="state" placeholder="State..">
+                        </label>
+                    </div>
+
+                    <div class="form-field">
+                        <label>
+                            <input required class="form-control" type="text" name="zip" placeholder="Zip..">
+                        </label>
+                    </div>
+
+                    <div class="form-field">
+                        <label>
+                            <input required class="form-control" type="text" name="country" placeholder="Country..">
+                        </label>
+                    </div>
+
+
+                </div>
+
+                <hr>
+
+                <input type="submit" id="form-button" class="btn btn-success btn-block" value="Continue"></form>
+        </div>
+
+        <br>
+        <div class="box-element hidden " id="payment-info">
+            <small>Paypal Options</small>
+        </div>
+    </div>
+
+
+    <div class="col-lg-6">
+        <div class="box-element">
+            <a href="{% url 'cart' %}" class="btn btn-outline-dark">&#x2190; Back to Cart</a>
+            <hr>
+            <h3>Order Summary</h3>
+            <hr>
+            <div class="cart-row">
+                <div style="flex:2">
+                    <img src="{% static 'images/2+placeholder.png' %}" alt="" class="row-image">
+                </div>
+                <div style="flex:2">
+                    <p>Product 1</p>
+                </div>
+                <div style="flex:1">
+                    <p>279.99 RON</p>
+                </div>
+                <div style="flex:1">
+                    <p>x2</p>
+                </div>
+            </div>
+            <h5>Items:   2</h5>
+            <h5>Total:   279.99 RON</h5>
+        </div>
+    </div>
+</div>
+
+{% endblock content %}
