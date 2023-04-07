@@ -1,4 +1,7 @@
 const updateBtns = document.querySelectorAll('.update-cart');
+const payBtn = document.getElementById('make-payment')
+
+
 
 updateBtns.forEach(btn => {
     btn.addEventListener('click', function(){
@@ -35,4 +38,9 @@ updateBtns.forEach(btn => {
 
         }
     })
+})
+
+payBtn.addEventListener('click', function(e){
+    e.preventDefault();
+    submitFormData()
 })

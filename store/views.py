@@ -2,6 +2,7 @@ import json
 from django.shortcuts import render
 from django.http import JsonResponse
 from .models import *
+import datetime
 
 
 # Create your views here.
@@ -43,14 +44,14 @@ def checkout(request):
         cartItems = order.get_cart_items
     else:
         items = []
-        order = {'get_cart_total': 0, 'get_cart_items': 0}
+        order = {'get_cart_total': 0, 'get_cart_items': 0, 'shipping': False}
         cartItems = order['get_cart_items']
     context = {'items': items, 'order': order, 'cartItems': cartItems}
     return render(request, 'store/checkout.html', context)
 
 
 def updateItem(request):
-    data =json.loads(request.body)
+    data = json.loads(request.body)
     productId = data['productId']
     action = data['action']
 
@@ -75,3 +76,34 @@ def updateItem(request):
         orderItem.delete()
 
     return JsonResponse('Item was added', safe=False)
+
+
+def processOrder(request):
+    transaction_id = datetime.datetime.now().timestamp()
+    data = json.loads(request.body)
+
+    if request.user.is_authenticated:
+        customer = request.user.customer
+        order, created = Order.objects.get_or_create(customer=customer, complete=False)
+        total = float(data['form']['total'])
+        order.transaction_id = transaction_id
+
+        if total == order.get_cart_total:
+            order.complete = True
+        order.save()
+
+        # Update or create the shipping address for the order
+        shipping_address, created = ShippingAddress.objects.get_or_create(
+            customer=customer,
+            order=order,
+        )
+        shipping_address.address = data['shipping']['address']
+        shipping_address.city = data['shipping']['city']
+        shipping_address.state = data['shipping']['state']
+        shipping_address.zipcode = data['shipping']['zipcode']
+        shipping_address.country = data['shipping']['country']
+        shipping_address.save()
+
+    else:
+        print('User not logged in')
+    return JsonResponse('Payment complete', safe=False)
