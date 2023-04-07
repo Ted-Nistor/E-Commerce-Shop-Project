@@ -26,13 +26,15 @@ h1,h2,h3,h4,h5,h6{
 }
 
 .bg-dark{
-	background-color: #4f868c!important;
+	background-color: #68b747
+!important;
 }
 
 #cart-icon{
 	width:25px;
 	display: inline-block;
 	margin-left: 15px;
+	margin-right: 10px;
 }
 
 #cart-total{
@@ -40,10 +42,12 @@ h1,h2,h3,h4,h5,h6{
 	text-align: center;
 	color:#fff;
 	background-color: red;
-	width: 20px;
-	height: 25px;
-	border-radius: 50%;
-	font-size: 14px;
+	width: 32px;
+	height: 22px;
+	border-radius: 15%;
+	font-size: 15px;
+	font-weight: bold;
+
 }
 
 .col-lg-4, .col-lg-6, .col-lg-8, .col-lg-12{
@@ -66,7 +70,7 @@ h1,h2,h3,h4,h5,h6{
 
 .cart-row{
 	display: flex;
-    align-items: flex-stretch;
+    align-items: center;
     padding-bottom: 10px;
     margin-bottom: 10px;
     border-bottom: 1px solid #ececec;
